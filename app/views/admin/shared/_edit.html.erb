@@ -2,5 +2,5 @@
 <%= form_tag(form_action, :id => "#{form_type}_form", :enctype => "multipart/form-data", :class => className) do %>
 
   <%= render :partial => "form" %>
-
 <% end %>
+<%= render "admin/shared/merge", { :form_type => "article", :form_action => { :action => "merge_article", :id => @article.id , :class => ('autosave')} } %>
