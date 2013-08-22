@@ -8,7 +8,7 @@ class Admin::ContentController < Admin::BaseController
 
   def merge_article
     Article.find(params[:id]).merge(params[:merge_with])
-    redirect_to '/admin/content/'
+    redirect_to action: 'index'
   end
 
   def auto_complete_for_article_keywords
