@@ -11,7 +11,7 @@ class Admin::ContentController < Admin::BaseController
     @article2 = Article.find(params[:merge_with])
     @article.body += @article2.body
     @article.comments += @article2.comments
-    debugger
+    @article2 = Article.find(@article2.id)
     @article2.destroy
     @article.save!
     redirect_to '/admin/content/'
