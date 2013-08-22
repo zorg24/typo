@@ -546,6 +546,10 @@ describe Admin::ContentController do
       end
     end
 
+    it 'shoudld add merge two articles' do
+      debugger
+    end
+
     describe 'resource_add action' do
 
       it 'should add resource' do

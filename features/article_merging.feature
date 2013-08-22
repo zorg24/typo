@@ -34,4 +34,4 @@ Feature: Article Merging
     Then I should see "Dashboard"
     When I follow "All Articles"
     And I follow "Robots"
-    And show me the page
+    Then I should see "Merge"
