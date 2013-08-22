@@ -5,33 +5,30 @@ Feature: Article Merging
   And I want to merge both articles
 
   Background:
-    Given the login is created for a user
-    And I am logged into the Dashboard
+    Given the blog is created for the following users:
+    | login  | password | email           | profile_id | name    | state    |
+    | admin  | password | a@example.com   | 1          | butt    | active   |
+    | user   | password | u@example.com   | 2          | face    | active   |
+
+    When I login as user
     Given I am on the new article page
     When I fill in "article_title" with "Robots"
     And I fill in "article__body_and_extended_editor" with "Robots rule"
     And I press "Publish"
     Then I should be on the admin content page
-
-  Scenario: Non-admin writes an article
-    When I go to the home page
-    Then I should see "Robots"
-    When I follow "Robots"
-    Then I should see "Robots rule"
+    And I follow "Log out"
 
   Scenario: Non-admin cannot see merge button
-    When I follow "Edit"
-    Then I should see "New article"
-    And I should see "Publish"
+    Given I login as user
+    When I follow "All Articles"
+    Then I follow "Robots"
+    And I should see "New article"
     And the "article_title" field should contain "Robots"
-    And I should not see "Merge with this Article"
+    And I should not see "Merge Articles"
 
-  Scenario: Admin user can see Merge button
-    When I follow "Log out"
-    Then I should see "Login"
-    Given the blog is set up
-    When I am logged into the admin panel
-    Then I should see "Dashboard"
+  Scenario: Admin can see Merge button
+    Given I login as admin
     When I follow "All Articles"
     And I follow "Robots"
-    Then I should see "Merge"
+    Then I should see "New article"
+    Then I should see "Merge Articles"

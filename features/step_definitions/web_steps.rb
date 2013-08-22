@@ -42,6 +42,16 @@ Given /^the blog is set up$/ do
                 :name => 'admin',
                 :state => 'active'})
 end
+
+Given /the blog is created for the following users/ do |users_table|
+    Blog.default.update_attributes!({:blog_name => 'Teh Blag',
+                                     :base_url => 'http://localhost:3000'});
+    Blog.default.save!
+  users_table.hashes.each do |user|
+    User.create!(user)
+  end
+end
+
 Given /the login is created for a user/ do
   Blog.default.update_attributes!({:blog_name => 'Teh Blag',
                                    :base_url => 'http://localhost:3000'});
@@ -53,6 +63,19 @@ Given /the login is created for a user/ do
                 :name => 'user',
                 :state => 'active'})
 end
+
+And /^I login as (.*)$/ do |user|
+  visit '/accounts/login'
+  fill_in 'user_login', with: user
+  fill_in 'user_password', with: 'password'
+  click_button 'Login'
+  if page.respond_to? :should
+    page.should have_content('Login successful')
+  else
+    assert page.has_content?('Login successful')
+  end
+end
+
 
 And /I am logged into the Dashboard/ do
   visit '/accounts/login'
