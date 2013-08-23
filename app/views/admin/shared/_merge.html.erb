@@ -2,8 +2,8 @@
   <h4>Merge Articles</h4> 
   <%= form_tag(form_action, :id => @article.id) do %>
     <div class='editor-left'>
-      <%= text_field_tag 'merge_with', '', {:style => 'width: 15%'} %>
-      <%= submit_tag "Merge", class: "btn info" %>
+      <%= text_field_tag 'merge_with' %>
+      <%= submit_tag "Merge" %>
     </div>
   <% end %>
 <% end %>

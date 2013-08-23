@@ -76,7 +76,6 @@ And /^I login as (.*)$/ do |user|
   end
 end
 
-
 And /I am logged into the Dashboard/ do
   visit '/accounts/login'
   fill_in 'user_login', :with => 'user'
